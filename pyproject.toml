@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "advent-of-code-2021"
+version = "0.1.0"
+description = "Solutions to advent of code 2021 problems"
+authors = ["Chandler Yocca <cyocca@comcast.net>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+[tool.poetry.dev-dependencies]
+black = "^21.11b1"
+pre-commit = "^2.15.0"
+isort = "^5.10.1"
+pycln = "^1.1.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

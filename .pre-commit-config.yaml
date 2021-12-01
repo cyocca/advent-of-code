@@ -1,0 +1,22 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v3.2.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+  - repo: local
+    hooks:
+      - &python_hook
+        id: pycln
+        name: Remove Unused Imports
+        entry: pycln
+        types: [python]
+        language: python
+      - id: isort
+        name: Sort Imports
+        entry: isort
+        <<: *python_hook
+      - id: black
+        name: Format Code
+        entry: black
+        <<: *python_hook
