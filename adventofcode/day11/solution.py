@@ -2,7 +2,7 @@
 
 from typing import Iterable, List, Set, Tuple
 
-from adventofcode.utils import load_list
+from adventofcode.utils import is_valid_point, load_list
 
 
 def get_energy_levels() -> List[List[int]]:
@@ -10,15 +10,6 @@ def get_energy_levels() -> List[List[int]]:
 
 
 energy_levels = get_energy_levels()
-
-
-def is_valid_point(x: int, y: int) -> bool:
-    """
-    Return True if (x, y) is a valid point.
-
-    Essentially make sure it's not outside the bounds of `energy_levels`
-    """
-    return 0 <= x < len(energy_levels[0]) and 0 <= y < len(energy_levels)
 
 
 def get_neighbors(x: int, y: int) -> Iterable[Tuple[int, int]]:
@@ -38,7 +29,7 @@ def get_neighbors(x: int, y: int) -> Iterable[Tuple[int, int]]:
         (x - 1, y - 1),
     )
 
-    return (n for n in neighbors if is_valid_point(*n))
+    return (n for n in neighbors if is_valid_point(*n, energy_levels))
 
 
 def increase_energy_levels(amount: int = 1) -> Set[Tuple[int, int]]:

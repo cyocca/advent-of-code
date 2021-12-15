@@ -30,3 +30,12 @@ def load_list(
     with open(file_path, "r") as file:
         # Use `.strip` to remove "\n"
         return [parser(l.strip()) for l in file.readlines()]
+
+
+def is_valid_point(x: int, y: int, grid: List[List]) -> bool:
+    """
+    Return True if (x, y) is a valid point.
+
+    Essentially make sure it's not outside the bounds of `grid`
+    """
+    return 0 <= x < len(grid[0]) and 0 <= y < len(grid)
