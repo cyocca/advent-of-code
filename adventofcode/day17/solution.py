@@ -57,3 +57,42 @@ def part_1() -> int:
 
 
 print(part_1())
+
+# def get_y_velocity(y_pos: int, steps: int) -> Optional[int]:
+#     if steps == 1:
+#         return y_pos
+
+#     # If there are two steps, the position *must* be odd.
+#     # For example, 150 can't be met in two steps.
+#     #     76 + 75 = 151
+#     #     75 + 74 = 149
+#     if steps % 2 == 0 and y_pos % 2 == 0:
+#         return None
+
+#     ceil(y_pos / steps)
+
+# def get_valid_y_velocities() -> Dict[int, List[int]]:
+#     velocities = defaultdict(list)
+
+#     for y_vel in range(-get_max_y_velocity(), get_max_y_velocity()):
+#         y = 0
+#         step = 0
+#         cur_vel = y_vel
+#         while target_area.max_y <= y:
+#             y += y_vel
+#             cur_vel -= 1
+#             step += 1
+
+#         if target_area.min_y <= y:
+#             velocities[step].append(y_vel)
+
+#     return velocities
+
+# y_velocities = get_valid_y_velocities()
+
+# from itertools import accumulate
+# from pprint import pprint
+# pprint(list(zip(
+#     accumulate(range(10)),
+#     reversed(list(accumulate(range(10)))),
+# )))
