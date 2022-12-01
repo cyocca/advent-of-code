@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "advent-of-code-2021"
+name = "advent-of-code"
 version = "0.1.0"
-description = "Solutions to advent of code 2021 problems"
+description = "Solutions to advent of code problems"
 authors = ["Chandler Yocca <cyocca@comcast.net>"]
 
 [tool.poetry.dependencies]
