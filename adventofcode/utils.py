@@ -21,7 +21,7 @@ def load_input(file_path: Optional[str] = None) -> str:
         file_path = Path(calling_module).parent.joinpath("input.txt")
 
     with open(file_path, "r") as file:
-        return file.read().strip()
+        return file.read().rstrip()
 
 
 def load_list(
@@ -37,7 +37,7 @@ def load_list(
     """
     # No-op if a parser isn't given
     parser = parser or (lambda x: x)
-    # Use `.strip` to remove last "\n"
+
     return [parser(l) for l in load_input(file_path).split("\n")]
 
 
