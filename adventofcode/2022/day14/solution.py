@@ -1,57 +1,8 @@
-from __future__ import annotations
-
-from dataclasses import dataclass
-from typing import Generator, List, Tuple
+from typing import List, Tuple
 
 from more_itertools import flatten
 
-from adventofcode.utils import load_list
-
-
-@dataclass
-class Point:
-
-    x: int
-    y: int
-
-    def translate(self, x: int = 0, y: int = 0) -> Point:
-        return Point(self.x + x, self.y + y)
-
-    def relative_to(self, point: Point) -> Point:
-        return Point(self.x - point.x, self.y - point.y)
-
-
-@dataclass
-class Line:
-
-    start: Point
-    end: Point
-
-    @property
-    def points(self) -> Generator[Point]:
-        if self.start.x - self.end.x == 0:
-            x = 0
-        elif self.start.x - self.end.x < 0:
-            x = 1
-        else:
-            x = -1
-
-        if self.start.y - self.end.y == 0:
-            y = 0
-        elif self.start.y - self.end.y < 0:
-            y = 1
-        else:
-            y = -1
-
-        cur = self.start
-        while cur != self.end:
-            yield cur
-            cur = cur.translate(x=x, y=y)
-
-        yield self.end
-
-    def relative_to(self, point: Point) -> Line:
-        return Line(self.start.relative_to(point), self.end.relative_to(point))
+from adventofcode.utils import Line, Point, load_list
 
 
 def get_lines() -> List[Line]:
