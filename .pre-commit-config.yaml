@@ -9,7 +9,7 @@ repos:
       - &python_hook
         id: pycln
         name: Remove Unused Imports
-        entry: pycln
+        entry: pycln --all
         types: [python]
         language: python
       - id: isort

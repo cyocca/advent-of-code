@@ -2,7 +2,6 @@
 
 from collections import defaultdict
 from dataclasses import dataclass
-from itertools import combinations
 from typing import Callable, Optional, Set, Tuple
 
 from more_itertools import ilen

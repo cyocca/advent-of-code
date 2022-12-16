@@ -2,7 +2,6 @@
 
 from collections import defaultdict
 from dataclasses import dataclass
-from itertools import product
 from typing import Dict, Iterable, List, Set, Tuple
 
 from adventofcode.utils import load_list
