@@ -3,7 +3,7 @@ from __future__ import annotations
 import inspect
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Callable, Generator, List, Optional, Tuple, TypeVar
+from typing import Callable, Generator, Iterator, List, Optional, Tuple, TypeVar
 
 _T = TypeVar("_T")
 
@@ -71,6 +71,21 @@ class Point:
 
     def as_tuple(self) -> Tuple[int, int]:
         return self.x, self.y
+
+    @property
+    def neighbors(self) -> Iterator[Point]:
+        directions = (
+            (0, 1),
+            (1, 1),
+            (1, 0),
+            (1, -1),
+            (0, -1),
+            (-1, -1),
+            (-1, 0),
+            (-1, 1),
+        )
+
+        return (self.translate(*d) for d in directions)
 
 
 @dataclass(frozen=True)

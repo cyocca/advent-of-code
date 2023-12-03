@@ -14,7 +14,7 @@ repos:
         language: python
       - id: isort
         name: Sort Imports
-        entry: isort
+        entry: isort --profile black
         <<: *python_hook
       - id: black
         name: Format Code
