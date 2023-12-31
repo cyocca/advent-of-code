@@ -240,7 +240,7 @@ def get_segments(perimeter: list[Point]) -> Iterable[tuple[Point, Point]]:
     return zip(perimeter, (*perimeter[1:], perimeter[0]))
 
 
-def get_area(perimeter: list[Point]) -> float:
+def get_area(perimeter: list[Point], include_perimeter_points: bool = False) -> float:
     segments = list(get_segments(perimeter))
     # Only include the start point, not the end point.
     # The next segment will include it (we don't want to double count).
@@ -251,4 +251,7 @@ def get_area(perimeter: list[Point]) -> float:
     area = 0.5 * abs(sum(p0.x * p1.y - p1.x * p0.y for p0, p1 in segments))
 
     # The area formula only includes half of the perimeter points.
-    return area + (perimeter_point_count // 2) + 1
+    multiplier = 1 if include_perimeter_points else -1
+    perimeter_offset = multiplier * (perimeter_point_count // 2)
+
+    return area + perimeter_offset + 1

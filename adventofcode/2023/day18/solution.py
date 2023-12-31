@@ -72,7 +72,7 @@ def get_perimeter(instructions: Iterable[Instruction]) -> list[Point]:
 
 def get_area_from_instructions(instructions: Iterable[Instruction]) -> int:
     perimeter = get_perimeter(instructions)
-    return get_area(perimeter)
+    return get_area(perimeter, include_perimeter_points=True)
 
 
 def part_1() -> int:
