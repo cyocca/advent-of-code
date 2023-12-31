@@ -3,17 +3,8 @@ from __future__ import annotations
 from abc import ABC, abstractmethod
 from collections import defaultdict, deque
 from dataclasses import dataclass
-from enum import Enum
 
-from adventofcode.utils import Point, is_valid_point, load_list
-
-
-class Direction(Enum):
-
-    LEFT = Point(-1, 0)
-    RIGHT = Point(1, 0)
-    UP = Point(0, -1)
-    DOWN = Point(0, 1)
+from adventofcode.utils import Direction, Point, is_valid_point, load_list
 
 
 @dataclass

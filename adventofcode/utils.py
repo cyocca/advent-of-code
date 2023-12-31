@@ -2,8 +2,18 @@ from __future__ import annotations
 
 import inspect
 from dataclasses import dataclass
+from enum import Enum
 from pathlib import Path
-from typing import Callable, Generator, Iterator, List, Optional, Tuple, TypeVar
+from typing import (
+    Callable,
+    Generator,
+    Iterable,
+    Iterator,
+    List,
+    Optional,
+    Tuple,
+    TypeVar,
+)
 
 _T = TypeVar("_T")
 
@@ -199,3 +209,46 @@ class Line:
             return None
 
         return Point(x, y)
+
+
+class Direction(Enum):
+
+    LEFT = Point(-1, 0)
+    RIGHT = Point(1, 0)
+    UP = Point(0, -1)
+    DOWN = Point(0, 1)
+
+    def get_opposite(self) -> Direction:
+        if self is Direction.LEFT:
+            return Direction.RIGHT
+
+        if self is Direction.RIGHT:
+            return Direction.LEFT
+
+        if self is Direction.UP:
+            return Direction.DOWN
+
+        if self is Direction.DOWN:
+            return Direction.UP
+
+        raise ValueError(f"Unknown direction `{self}`")
+
+
+def get_segments(perimeter: list[Point]) -> Iterable[tuple[Point, Point]]:
+    # Pairs of points wrapping back around, i.e. count the first point as the first and
+    # last point.
+    return zip(perimeter, (*perimeter[1:], perimeter[0]))
+
+
+def get_area(perimeter: list[Point]) -> float:
+    segments = list(get_segments(perimeter))
+    # Only include the start point, not the end point.
+    # The next segment will include it (we don't want to double count).
+    perimeter_point_count = sum(Line(*s).point_count - 1 for s in segments)
+
+    # https://stackoverflow.com/a/451482
+    # https://en.wikipedia.org/wiki/Green's_theorem#Area_calculation
+    area = 0.5 * abs(sum(p0.x * p1.y - p1.x * p0.y for p0, p1 in segments))
+
+    # The area formula only includes half of the perimeter points.
+    return area + (perimeter_point_count // 2) + 1
