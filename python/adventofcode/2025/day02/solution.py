@@ -2,6 +2,7 @@ from collections.abc import Iterable
 from adventofcode.utils import load_input
 from dataclasses import dataclass
 from typing_extensions import Self
+from math import ceil
 
 @dataclass
 class Range:
@@ -48,4 +49,31 @@ def part1() -> int:
 
     return answer
 
+def part2() -> int:
+    ranges = [Range.parse(t) for t in load_input().split(",")]
+    # Make sure there are no duplicates
+    invalid = set()
+
+    for r in ranges:
+        # For repeated strings
+        max_length = len(r.end) // 2
+        lengths = range(1, max_length + 1)
+        for length in lengths:
+            # The number of repeats is the length of the string divided by the length
+            # of the repeat
+            all_repeats = {
+                full_length // length
+                for full_length in range(len(r.start), len(r.end) + 1)
+            }
+            # There must be at least two repeats
+            all_repeats = {r for r in all_repeats if r > 1}
+            for number in get_numbers(length):
+                for repeats in all_repeats:
+                    candidate = int(str(number) * repeats)
+                    if int(r.start) <= candidate <= int(r.end):
+                        invalid.add(candidate)
+
+    return sum(invalid)
+
 print(part1())
+print(part2())
